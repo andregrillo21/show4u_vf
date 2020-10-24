@@ -56,50 +56,31 @@ export default function Login({ navigation }) {
     return (
         <LinearGradient colors={['#560194', '#160026']} style={styles.linearGradient}>
 
-            <ScrollView style={{flex:1}}>
-                <View>
-                    <Text style={styles.textTitle}>
-                        Login
-                    </Text>
+                <Text style={styles.textTitle}>Login</Text>
+
+
+                <View style={styles.viewContainer}>
+                    <Text style={styles.inputTitle}>E-mail</Text>
+                    <TextInput style={styles.textInput}onChangeText={setEmail}/>
                 </View>
 
                 <View style={styles.viewContainer}>
-                    <Text style={styles.inputTitle}>
-                        E-mail
-                    </Text>
-                    <TextInput
-                        style={styles.textInput}
-                        onChangeText={(email) => setEmail(email)}
-                    />
-                </View>
-
-                <View style={styles.viewContainer}>
-                    <Text style={styles.inputTitle}>
-                        Senha
-                    </Text>
-                    <TextInput
-                        style={styles.textInput}
-                        secureTextEntry={true}
-                        onChangeText={(senha) => setSenha(senha)}
-                    />
+                    <Text style={styles.inputTitle}>Senha</Text>
+                    <TextInput style={styles.textInput} secureTextEntry={true} onChangeText={setSenha}/>
                 </View>
 
                 <View style={styles.viewCreateLogin}>
-                    <Text
-                        style={styles.TextCreateLogin}
-                        onPress={() => navigation.navigate('RegisterLoginPage')}>
-                        Crie sua conta
-                    </Text>
+                    <TouchableOpacity style={{padding:10}} onPress={() => navigation.navigate('RegisterLoginPage')}>
+                        <Text style={styles.TextCreateLogin}>Crie sua conta</Text>
+                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.viewButton}>
-                    <TouchableOpacity
-                        style={styles.customBtnBG}
-                        onPress={() => { sendBd(email, senha) }}  >
+                    <TouchableOpacity style={styles.customBtnBG} onPress={() => { sendBd(email, senha) }}>
                         <Text style={styles.customBtnText}>ENTRAR</Text>
                     </TouchableOpacity>
                 </View>
-            </ScrollView>
+
 
         </LinearGradient>
     )
@@ -108,8 +89,7 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
     linearGradient: {
         flex: 1,
-        paddingLeft: 15,
-        paddingRight: 15,
+        justifyContent:'space-around'
     },
 
     textTitle: {
@@ -121,8 +101,9 @@ const styles = StyleSheet.create({
     },
 
     viewContainer: {
-        marginLeft: 10,
-        marginTop: 20
+        width:"100%",
+        paddingHorizontal:10,
+        marginTop:'10%'
     },
 
     inputTitle: {
@@ -133,29 +114,26 @@ const styles = StyleSheet.create({
 
     textInput: {
         height: 40,
-        width: 360,
         borderRadius: 7,
-        borderColor: "#FFF",
         color: "#FFF",
         fontSize: 20,
-        padding: 10,
-        borderWidth: 1
+        borderWidth: 1,
+        borderColor: "#FFF",
     },
 
     viewButton: {
-        alignItems: "center",
         margin: 50,
-        marginTop: 150,
-        marginBottom: 80
+        alignItems: "center",
+        justifyContent:'center',
     },
 
     customBtnBG: {
-        backgroundColor: "#D930BD",
-        width: 200,
+        width: "65%",
         height: 50,
+        borderRadius: 30,
         alignItems: "center",
-        paddingVertical: 10,
-        borderRadius: 30
+        justifyContent:'center',
+        backgroundColor: "#D930BD",
     },
 
     customBtnText: {
@@ -164,8 +142,11 @@ const styles = StyleSheet.create({
     },
 
     viewCreateLogin: {
+        padding:10,
+        marginTop: 50,
         alignItems: "center",
-        marginTop: 50
+        // borderWidth: 1,
+        // borderColor: "#FFF",
     },
 
     TextCreateLogin: {

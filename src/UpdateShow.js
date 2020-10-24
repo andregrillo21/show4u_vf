@@ -85,9 +85,9 @@ export default function UpdateShow({ navigation }) {
     return (
         <LinearGradient colors={['#560194', '#160026']} style={styles.linearGradient}>
 
-            <View style={styles.viewTitle}>
-                <Text style={styles.textTitle}/>
-            </View>
+
+            <Text style={{ margin:30 }}/>
+
 
             <View style={styles.viewContainer}>
                 <Text style={styles.inputTitle}>Horário</Text>
@@ -132,19 +132,7 @@ export default function UpdateShow({ navigation }) {
 const styles = StyleSheet.create({
     linearGradient: {
         flex: 1,
-        justifyContent:'space-around'
-    },
-
-    viewTitle: {
-        alignItems: "center",
-    },
-
-    textTitle: {
-        textAlign: "center",
-        margin: 20,
-        fontSize: 30,
-        fontWeight: "bold",
-        color: "#FFF"
+        justifyContent:'space-between'
     },
 
     viewContainer: {
@@ -173,12 +161,12 @@ const styles = StyleSheet.create({
     },
 
     customBtnBG: {
-        backgroundColor: "#D930BD",
-        width: 200,
         height: 50,
+        width: '70%',
+        borderRadius: 30,
         alignItems: "center",
-        paddingVertical: 10,
-        borderRadius: 30
+        justifyContent:'center',
+        backgroundColor: "#D930BD",
     },
 
     customBtnText: {

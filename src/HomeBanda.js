@@ -56,7 +56,7 @@ export default function Home({ navigation }) {
             />
 
             <View style={styles.viewButton}>
-                <TouchableOpacity style={styles.customBtnBG}onPress={() => { RedCadastroShow() }}>
+                <TouchableOpacity style={styles.customBtnBG} onPress={() => { RedCadastroShow() }}>
                     <Text style={styles.customBtnText}>Cadastrar show</Text>
                 </TouchableOpacity>
             </View>
@@ -65,14 +65,16 @@ export default function Home({ navigation }) {
                 <Text style={styles.textListShows}>Lista de shows</Text>
             </View>
 
-            {docs.map(res => (
-                <TouchableOpacity key={res.Id_Show} onPress={()=>UpdateShow(res)} style={styles.viewShow}>
-                    <Text style={styles.textShow}>Endereço: {res.Endereco}</Text>
-                    <Text style={styles.textShow}>Data: {res.Horario}</Text>
-                    <Text style={styles.textShow}>Tipo de entrada: {res.forma_de_entrada}</Text>
-                    <Text style={styles.textShow}>Status do show: {res.Estado}</Text>
-                </TouchableOpacity>
-            ))}
+            <ScrollView>
+                {docs.map(res => (
+                    <TouchableOpacity key={res.Id_Show} onPress={()=>UpdateShow(res)} style={styles.viewShow}>
+                        <Text style={styles.textShow}>Endereço: {res.Endereco}</Text>
+                        <Text style={styles.textShow}>Data: {res.Horario}</Text>
+                        <Text style={styles.textShow}>Tipo de entrada: {res.forma_de_entrada}</Text>
+                        <Text style={styles.textShow}>Status do show: {res.Estado}</Text>
+                    </TouchableOpacity>
+                ))}
+            </ScrollView>
 
         </LinearGradient>
     )
@@ -81,8 +83,7 @@ export default function Home({ navigation }) {
 const styles = StyleSheet.create({
     linearGradient: {
         flex: 1,
-        paddingLeft: 15,
-        paddingRight: 15,
+        paddingHorizontal:10
     },
 
     textTitle: {
@@ -94,24 +95,26 @@ const styles = StyleSheet.create({
     },
 
     styleIconLogOut: {
-        textAlign: "right",
-        marginTop: -60,
-        marginBottom: 35
+        position:'absolute',
+        top:15,
+        right:15
+        // marginTop: -60,
+        // marginBottom: 35
     },
 
     viewButton: {
+        marginTop:10,
+        marginBottom: 50,
         alignItems: "center",
-        margin: 50,
-        marginBottom: 50
     },
 
     customBtnBG: {
-        backgroundColor: "#D930BD",
-        width: 200,
         height: 50,
+        width: '100%',
+        borderRadius: 30,
         alignItems: "center",
-        paddingVertical: 10,
-        borderRadius: 30
+        justifyContent:'center',
+        backgroundColor: "#D930BD",
     },
 
     customBtnText: {
