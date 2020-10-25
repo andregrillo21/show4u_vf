@@ -1,25 +1,37 @@
 import React, { Component, useState } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import sqlServer from '../Database/DataBaseSql';
-import { TextInput, StyleSheet, View, Text, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { TextInput, StyleSheet, View, Text, TouchableOpacity, KeyboardAvoidingView, Alert } from 'react-native';
 
 export default function CadastroLogin({ navigation }) {
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const [nome, setNome] = useState("");
-  const [genero, setGenero] = useState("");
+  const [email, setEmail] = useState("sergio@hot.com");
+  const [senha, setSenha] = useState("123");
+  const [configSenha, setConfigSenha] = useState("321")
+  const [nome, setNome] = useState("Sérgio");
+  const [genero, setGenero] = useState("Rock");
 
   function validareBd({ }) {
-    let validadeEmail = '\'' + email + '\'';
-    const queryEmail = 'SELECT Email FROM dbo.Banda WHERE Email = ' + validadeEmail + '';
-    var result = sqlServer.executeQuery(queryEmail);
+    const validadeEmail = '\'' + email + '\'';
 
-    result.then(result => {
-      console.log(result[0].Email);
-      alert('Cadastro já existente.');
-    }).catch(err => {
-      sendBd(email, senha, nome, genero);
-    });
+    if(senha != configSenha){
+    
+      Alert.alert('Opa','As senhas não são iguais')
+    
+    }else{
+
+      const queryEmail = 'SELECT Email FROM dbo.Banda WHERE Email = ' + validadeEmail + '';
+
+      sqlServer.executeQuery(queryEmail)
+      .then(result => {
+        console.log(result);
+        alert('Cadastro já existente.');
+      }).catch(err => {
+        sendBd(email, senha, nome, genero);
+      });
+      
+      navigation.navigate('LoginPage');
+    
+    }
   }
 
   function sendBd({ }) {
@@ -49,27 +61,27 @@ export default function CadastroLogin({ navigation }) {
 
         <View style={styles.viewContainer}>
           <Text style={styles.inputTitle}>E-mail</Text>
-          <TextInput style={styles.textInput} onChangeText={setEmail}/>
+          <TextInput style={styles.textInput} value={email} onChangeText={setEmail}/>
         </View>
 
         <View style={styles.viewContainer}>
           <Text style={styles.inputTitle}>Senha</Text>
-          <TextInput style={styles.textInput} onChangeText={setSenha}/>
+          <TextInput style={styles.textInput} value={senha} onChangeText={setSenha}/>
         </View>
 
         <View style={styles.viewContainer}>
           <Text style={styles.inputTitle}>Confirmação de senha</Text>
-          <TextInput style={styles.textInput} />
+          <TextInput style={styles.textInput} value={configSenha} onChangeText={setConfigSenha} />
         </View>
 
         <View style={styles.viewContainer}>
           <Text style={styles.inputTitle}>Artista</Text>
-          <TextInput style={styles.textInput} onChangeText={setNome}/>
+          <TextInput style={styles.textInput} value={nome} onChangeText={setNome}/>
         </View>
 
         <View style={styles.viewContainer}>
           <Text style={styles.inputTitle}>Gênero musical</Text>
-          <TextInput style={styles.textInput} onChangeText={setGenero}/>
+          <TextInput style={styles.textInput} value={genero} onChangeText={setGenero}/>
         </View>
 
         <View style={styles.viewButton}>

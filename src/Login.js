@@ -10,15 +10,15 @@ IconHeadeset.loadFont();
 IconGuitar.loadFont();
 
 export default function Login({ navigation }) {
-    const [email, setEmail] = useState("");
-    const [senha, setSenha] = useState("");
+    const [email, setEmail] = useState("sergio@hot.com");
+    const [senha, setSenha] = useState("123");
 
     React.useEffect(() => {
         async function LoadStorageData() {
             const getResult = await AsyncStorage.getItem('@RNAuth:user');
             const result = JSON.parse(getResult);
 
-            if (result[0]) {
+            if (result) {
                 console.log("foi " + result)
                 navigation.navigate("HomeBanda", { result })
             }
@@ -35,8 +35,7 @@ export default function Login({ navigation }) {
 
             resultQuery.then(async (result) => {
 
-                if (result[0]) {
-                    console.log(result)
+                if (result) {
                     await AsyncStorage.setItem('@RNAuth:user', JSON.stringify(result)) |
                         navigation.navigate('HomeBanda', { result });
                 } else {
@@ -61,12 +60,12 @@ export default function Login({ navigation }) {
 
                 <View style={styles.viewContainer}>
                     <Text style={styles.inputTitle}>E-mail</Text>
-                    <TextInput style={styles.textInput}onChangeText={setEmail}/>
+                    <TextInput style={styles.textInput} value={email} onChangeText={setEmail}/>
                 </View>
 
                 <View style={styles.viewContainer}>
                     <Text style={styles.inputTitle}>Senha</Text>
-                    <TextInput style={styles.textInput} secureTextEntry={true} onChangeText={setSenha}/>
+                    <TextInput style={styles.textInput} secureTextEntry={true} value={senha} onChangeText={setSenha}/>
                 </View>
 
                 <View style={styles.viewCreateLogin}>

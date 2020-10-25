@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import IconHeadeset from 'react-native-vector-icons/Ionicons';
 import IconLogOut from 'react-native-vector-icons/Ionicons';
@@ -27,11 +27,17 @@ export default function Home({ navigation }) {
 
     const [docs, setDocs] = useState([]);
 
-    resultQuery.then(result => {
-        setDocs(result);
-    }).catch(err => {
-        alert('Erro na busca');
-    });
+    const oneRender = () => {
+        resultQuery.then(result => {
+            setDocs(result);
+        }).catch(err => {
+            alert('Erro na busca');
+        });
+    }
+
+    useEffect(()=>{
+        oneRender();
+    },[])
 
     function RedCadastroShow() {
         navigation.navigate('RegisterBandPage', { userLogin });
@@ -56,7 +62,7 @@ export default function Home({ navigation }) {
             />
 
             <View style={styles.viewButton}>
-                <TouchableOpacity style={styles.customBtnBG} onPress={() => { RedCadastroShow() }}>
+                <TouchableOpacity style={styles.customBtnBG} onPress={RedCadastroShow}>
                     <Text style={styles.customBtnText}>Cadastrar show</Text>
                 </TouchableOpacity>
             </View>
